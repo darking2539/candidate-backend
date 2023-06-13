@@ -5,6 +5,7 @@ import (
 	"candidate-backend/models"
 	"context"
 	"errors"
+	"math"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -33,7 +34,7 @@ func CreateTaskRepo(taskModel models.TaskModel) (response string, err error) {
 	return
 }
 
-func GetTaskListRepo(page int64, perPage int64, keyword string) (response []models.TaskModel, err error) {
+func GetTaskListRepo(page int64, perPage int64, keyword string) (response []models.TaskModel, pagination models.Pagination, err error) {
 
 	mongoDB, err := db.GetMongoDB()
 	if err != nil {
@@ -62,6 +63,11 @@ func GetTaskListRepo(page int64, perPage int64, keyword string) (response []mode
 		Sort:  bson.M{"createdDate": -1},
 	}
 
+	totalResults, err := collection.CountDocuments(ctx, filter)
+	if err != nil {
+		return
+	}
+
 	cursor, err := collection.Find(ctx, filter, &findOptions)
 	if err != nil {
 		return
@@ -70,6 +76,13 @@ func GetTaskListRepo(page int64, perPage int64, keyword string) (response []mode
 	defer cursor.Close(ctx)
 	if err = cursor.All(ctx, &response); err != nil {
 		return
+	}
+
+	pagination = models.Pagination{
+		Page: page,
+		PerPage: perPage,
+		TotalResults: totalResults,
+		TotalPages: int64(math.Ceil(float64(totalResults)/float64(perPage))),
 	}
 
 	return

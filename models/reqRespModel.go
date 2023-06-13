@@ -17,7 +17,8 @@ type GetListRequest struct {
 }
 
 type GetListResponse struct {
-	Data []TaskData `json:"data"`
+	Pagination Pagination `json:"pagination"`
+	Data       []TaskData `json:"data"`
 }
 
 type TaskData struct {

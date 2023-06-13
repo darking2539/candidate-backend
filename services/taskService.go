@@ -24,7 +24,7 @@ func AddTaskMockUpSv(taskModel models.TaskModel) (resp models.AddTaskResponse, e
 
 func GetTaskListSv(page int64, perPage int64, keyword string) (resp models.GetListResponse, err error) {
 
-	taskModel, err := repo.GetTaskListRepo(page, perPage, keyword)
+	taskModel, pagination, err := repo.GetTaskListRepo(page, perPage, keyword)
 	if err != nil {
 		return
 	}
@@ -44,7 +44,10 @@ func GetTaskListSv(page int64, perPage int64, keyword string) (resp models.GetLi
 		})
 	}
 
-	resp.Data = dataResp
+	resp = models.GetListResponse{
+		Data: dataResp,
+		Pagination: pagination,
+	}
 
 	return
 }
