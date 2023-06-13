@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "1e9f759f-6886-4f9b-a593-69768c2e0f07",
+		"name": "Boss-Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13929754"
+	},
+	"item": [
+		{
+			"name": "Robinhood Test",
+			"item": [
+				{
+					"name": "localhost:8080/task/add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"task\": {\n        \"title\": \"นัดสัมภาษณ์\",\n        \"description\": \"ทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบทดสอบ\",\n        \"status\": \"To Do\",\n        \"createdEmail\": \"boss@gmail.com\",\n        \"createdName\": \"แบทแมน\",\n        \"comments\": []\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/task/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/task/list",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\": 1,\n    \"perPage\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/task/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/task/comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"648834afa3c032d49f8e309e\",\n    \"comment\": {\n        \"createdEmail\": \"boss@gmail.com\",\n        \"CreatedName\": \"Luffy\",\n        \"commentDesp\": \"ไปทำมาใหม่\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/task/comment",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/task/keep/648834afa3c032d49f8e309e",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/task/keep/648834afa3c032d49f8e309e",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"keep",
+								"648834afa3c032d49f8e309e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/task/submit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"648834b0a3c032d49f8e309f\",\n    \"status\": \"done\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/task/submit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
