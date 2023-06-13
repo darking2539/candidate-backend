@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  database:
+    container_name: mongodb
+    image: mongo:6-jammy
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=test
+    networks:
+      - backend
+    volumes:
+      - dbdata6:/data/db
+
+  api-service:
+    container_name: candidate-api
+    image: candidate-api
+    build: .
+    environment:
+      - MONGODB_URI=mongodb://admin:password@mongodb:27017/admin
+      - DATABASE_NAME=admin
+      - PORT=8080
+    networks:
+      - backend
+    ports:
+      - "8080:8080"
+
+volumes:
+  dbdata6:  
+
+networks:
+  backend:
+    driver: bridge
