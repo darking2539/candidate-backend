@@ -1,7 +1,5 @@
 package models
 
-import "time"
-
 type AddTaskRequest struct {
 	TaskData TaskModel `json:"task"`
 }
@@ -28,7 +26,8 @@ type TaskData struct {
 	Status       string    `json:"status"`
 	CreatedEmail string    `json:"createdEmail"`
 	CreatedName  string    `json:"createdName"`
-	CreatedDated time.Time `json:"createdDated"`
+	CreatedDated string    `json:"createdDated"`
+	Comment      []Comment `json:"comments"`
 }
 
 type AddCommentRequest struct {

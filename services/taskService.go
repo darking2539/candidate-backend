@@ -29,9 +29,7 @@ func GetTaskListSv(page int64, perPage int64, keyword string) (resp models.GetLi
 		return
 	}
 
-
 	dataResp := []models.TaskData{}
-
 	for _, task := range taskModel {
 		dataResp = append(dataResp, models.TaskData{
 			Id: task.ID.Hex(),
@@ -40,7 +38,8 @@ func GetTaskListSv(page int64, perPage int64, keyword string) (resp models.GetLi
 			Status: task.Status,
 			CreatedEmail: task.CreatedEmail,
 			CreatedName: task.CreatedName,
-			CreatedDated: task.CreatedDated,
+			CreatedDated: task.CreatedDated.Local().Format("2006-01-02 15:04:05"),
+			Comment: task.Comment,
 		})
 	}
 
@@ -52,14 +51,23 @@ func GetTaskListSv(page int64, perPage int64, keyword string) (resp models.GetLi
 	return
 }
 
-func GetDetailSv(taskId string) (resp models.TaskModel, err error) {
+func GetDetailSv(taskId string) (resp models.TaskData, err error) {
 
 	taskData, err := repo.GetTaskDetailRepo(taskId)
 	if err != nil {
 		return
 	}
 
-	resp = taskData
+	resp = models.TaskData{
+		Id: taskData.ID.Hex(),
+		Title: taskData.Title,
+		Description: taskData.Description,
+		Status: taskData.Status,
+		CreatedEmail: taskData.CreatedEmail,
+		CreatedName: taskData.CreatedName,
+		CreatedDated: taskData.CreatedDated.Local().Format("2006-01-02 15:04:05"),
+		Comment: taskData.Comment,
+	}
 
 	return
 }
