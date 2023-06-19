@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func TestUpdateOneCollectCpeFlagReturnEquipmentAllDataInArrayTransactionDAO(t *testing.T) {
+func TestDateFormat(t *testing.T) {
 
 	dateString := DateFormat(time.Now())
 
