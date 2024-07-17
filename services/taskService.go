@@ -3,6 +3,7 @@ package services
 import (
 	"candidate-backend/models"
 	repo "candidate-backend/repositories"
+	"candidate-backend/utils"
 	"errors"
 	"time"
 )
@@ -38,7 +39,7 @@ func GetTaskListSv(page int64, perPage int64, keyword string) (resp models.GetLi
 			Status: task.Status,
 			CreatedEmail: task.CreatedEmail,
 			CreatedName: task.CreatedName,
-			CreatedDated: task.CreatedDated.Local().Format("2006-01-02 15:04:05"),
+			CreatedDated: utils.DateFormat(task.CreatedDated),
 			Comment: task.Comment,
 		})
 	}
@@ -65,7 +66,7 @@ func GetDetailSv(taskId string) (resp models.TaskData, err error) {
 		Status: taskData.Status,
 		CreatedEmail: taskData.CreatedEmail,
 		CreatedName: taskData.CreatedName,
-		CreatedDated: taskData.CreatedDated.Local().Format("2006-01-02 15:04:05"),
+		CreatedDated: utils.DateFormat(taskData.CreatedDated),
 		Comment: taskData.Comment,
 	}
 
