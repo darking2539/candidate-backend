@@ -21,4 +21,7 @@ func Setup(router *gin.Engine) {
 	router.POST("/task/submit", ctl.SubmitStatusTaskCtl)
 	router.POST("/task/keep/:id", ctl.KeepTaskCtl)
 
+	//POC
+	router.POST("/decrypt-pdf", ctl.DecryptPdfFile)
+
 }
